@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 export default function useSpeechRecognition() {
   const [listening, setListening] = useState(false);
@@ -17,10 +17,15 @@ export default function useSpeechRecognition() {
     recognition.maxAlternatives = 1;
     recognition.onresult = (event) => {
       setTranscript(event.results[0][0].transcript);
-      setListening(false);
+      // No detenemos el reconocimiento aquí
     };
-    recognition.onerror = () => setListening(false);
-    recognition.onend = () => setListening(false);
+    recognition.onerror = () => {
+      if (listening) recognition.start();
+    };
+    recognition.onend = () => {
+      // Si listening sigue en true, reinicia el reconocimiento
+      if (listening) recognition.start();
+    };
     recognitionRef.current = recognition;
     setListening(true);
     recognition.start();

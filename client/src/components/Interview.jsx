@@ -62,7 +62,7 @@ function Interview() {
 
   const handleStartLevel = (idx) => {
     if (idx === currentLevel) {
-      navigate('/question', { state: { user: user.id, nivel: idx + 1 } });
+      navigate('/question', { state: { user: user.id, nivel: idx + 1, descripcion: levels[idx].description } });
     }
   };
 
