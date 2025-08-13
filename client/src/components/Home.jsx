@@ -28,7 +28,7 @@ function Home() {
 
   return (
     <div className="home-container" style={{maxWidth:400,margin:'40px auto',padding:24,boxShadow:'0 2px 8px #ccc',borderRadius:12,background:'#fff'}}>
-      <h1 style={{textAlign:'center',marginBottom:24}}>Simulador de Entrevistas Laborales</h1>
+      <h1 style={{textAlign:'center',marginBottom:24}}>Bienvenido a MagTrain</h1>
       <form onSubmit={handleSubmit} style={{display:'flex',flexDirection:'column',gap:16}}>
         <label style={{fontWeight:'bold'}}>Nombre:</label>
         <input
