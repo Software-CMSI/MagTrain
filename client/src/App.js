@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Interview from './components/Interview';
 import Feedback from './components/Feedback';
 import QuestionScreen from './components/QuestionScreen';
+import Resultados from './components/Resultados';
 
 function App() {
+  useEffect(() => {
+    localStorage.removeItem('maxLevelCompleted');
+    localStorage.removeItem('respuestasEntrevista');
+  }, []);
+
   return (
     <Router>
       <Routes>
@@ -13,6 +19,7 @@ function App() {
         <Route path="/interview" element={<Interview />} />
         <Route path="/question" element={<QuestionScreen />} />
         <Route path="/feedback" element={<Feedback />} />
+        <Route path="/resultados" element={<Resultados />} />
       </Routes>
     </Router>
   );
