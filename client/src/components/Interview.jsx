@@ -56,9 +56,9 @@ function Interview() {
   const [showQuestion, setShowQuestion] = useState(false);
   const [answers, setAnswers] = useState([]);
   const [answer, setAnswer] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const { listening, transcript, startListening, stopListening, setTranscript } = useSpeechRecognition();
+  const [, setLoading] = useState(false);
+  const [, setError] = useState('');
+  const { transcript, setTranscript } = useSpeechRecognition();
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('interviewUser'));
 
@@ -75,6 +75,8 @@ function Interview() {
     }
   };
 
+  // Esta función queda definida para uso futuro desde la pantalla de preguntas.
+  // eslint-disable-next-line no-unused-vars
   const handleNext = async () => {
     setLoading(true);
     setError('');
@@ -106,10 +108,10 @@ function Interview() {
   return (
   <div style={{maxWidth:600,margin:'40px auto',padding:32,background:'#1a1e3a',borderRadius:24,boxShadow:'0 4px 16px #1a1e3a',transition:'background 0.5s'}}>
       {showCompleted && (
-        <div style={{background:'#0cbccc',color:'#fff',padding:'16px',borderRadius:'12px',textAlign:'center',fontWeight:'bold',fontSize:'18px',marginBottom:'16px',animation:'fadeInUp 0.7s'}}>¡Nivel finalizado!</div>
+        <div style={{background:'#0cbccc',color:'#fff',padding:'16px',borderRadius:'12px',textAlign:'center',fontWeight:'bold',fontSize:'18px',marginBottom:'16px'}}>¡Nivel finalizado!</div>
       )}
       <h1 style={{ textAlign: "center", marginBottom: "32px", color: "#1976d2", letterSpacing: "2px", fontWeight: "bold" }}>
-        <span style={{fontSize:32,marginRight:8,animation:'bounce 1.2s infinite',color:'#1976d2'}}></span> Entrevista
+        <span style={{fontSize:32,marginRight:8,color:'#1976d2'}}></span> Entrevista
       </h1>
       <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'24px'}}>
         {levels.map((lvl, idx) => (
@@ -127,7 +129,7 @@ function Interview() {
             alignItems: 'center',
             position: 'relative',
             border: idx === currentLevel ? '2px solid #2898ee' : '2px solid #23275a',
-            animation: `fadeInUp 0.7s ${idx * 0.15}s both`
+            
           }}>
             <div style={{flex:1}}>
               <div style={{fontWeight:'bold',fontSize:26,color:'#2898ee',marginBottom:6,textShadow:'none'}}>{lvl.title}</div>
@@ -160,17 +162,14 @@ function Interview() {
           </div>
         ))}
         <button
-          style={{marginTop:32,background:'#1976d2',color:'#fff',border:'none',borderRadius:8,padding:'14px 32px',fontWeight:'bold',fontSize:18,boxShadow:'0 2px 8px #1a1e3a',cursor: maxLevelCompleted === 5 ? 'pointer' : 'not-allowed', opacity: maxLevelCompleted === 5 ? 1 : 0.5, animation:'bounce 1.2s infinite'}}
+          style={{marginTop:32,background:'#1976d2',color:'#fff',border:'none',borderRadius:8,padding:'14px 32px',fontWeight:'bold',fontSize:18,boxShadow:'0 2px 8px #1a1e3a',cursor: maxLevelCompleted === 5 ? 'pointer' : 'not-allowed', opacity: maxLevelCompleted === 5 ? 1 : 0.5}}
           disabled={maxLevelCompleted !== 5}
           onClick={handleContinue}
         >
-          <span style={{fontSize:22,marginRight:8,animation:'bounce 1.2s infinite'}}></span> Continuar
+          <span style={{fontSize:22,marginRight:8}}></span> Continuar
         </button>
       </div>
-      <style>{`
-        @keyframes fadeInUp { 0%{opacity:0;transform:translateY(40px);} 100%{opacity:1;transform:translateY(0);} }
-        @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
-      `}</style>
+      
     </div>
   );
 }

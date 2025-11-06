@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from './Layout';
 
 function Feedback() {
   const user = JSON.parse(localStorage.getItem('interviewUser'));
@@ -6,13 +7,13 @@ function Feedback() {
 
   // Calcular puntaje global y feedback por nivel
   const puntajes = answers?.map(a => a.puntaje || 0);
-  const feedbacks = answers?.map(a => a.evaluacion || '');
   const puntajeGlobal = puntajes?.length ? (puntajes.reduce((a,b) => a+b, 0) / puntajes.length).toFixed(2) : null;
 
   return (
-    <div className="feedback-container">
-      <h2>¡Entrevista finalizada!</h2>
-      <p>Gracias, <b>{user?.name}</b>, por completar la simulación para el cargo de <b>{user?.role}</b>.</p>
+    <Layout>
+      <div className="feedback-container">
+        <h2 style={{color:'#2898ee',textAlign:'center',marginBottom:16}}>¡Entrevista finalizada!</h2>
+        <p style={{textAlign:'center'}}>Gracias, <b>{user?.name}</b>, por completar la simulación para el cargo de <b>{user?.role}</b>.</p>
       {puntajeGlobal && (
         <h3>Calificación global: <span style={{color:'green'}}>{puntajeGlobal} / 10</span></h3>
       )}
@@ -28,8 +29,9 @@ function Feedback() {
           </li>
         ))}
       </ol>
-      <p><i>¡Sigue practicando para mejorar tus resultados!</i></p>
-    </div>
+        <p style={{textAlign:'center',marginTop:18}}><i>¡Sigue practicando para mejorar tus resultados!</i></p>
+      </div>
+    </Layout>
   );
 }
 
